@@ -1,0 +1,16 @@
+{
+  "name": "acceso-a-datos-2-dam",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vitepress build",
+    "dev": "vitepress dev"
+  },
+  "devDependencies": {
+    "medium-zoom": "1.1.2",
+    "mermaid": "11.17.2",
+    "vitepress": "1.6.4",
+    "vitepress-plugin-mermaid": "2.0.17"
+  },
+  "description": "Web de los apuntes con VitePress"
+}

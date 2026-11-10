@@ -1,0 +1,110 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   Colores pastel, tonos lisos y nada en rojo.
+   Cada color va en dos versiones del mismo tono: la pálida para los fondos y
+   una algo más oscura para letra y enlaces (contraste de 4,5 o más).
+     verde   (el de la web: #159957) → color principal, enlaces, menú
+     azul    → tablas e «Información»
+     amarillo→ «Atención» y resaltado
+     violeta → «Importante», «Ver más» y la línea de los títulos
+   ───────────────────────────────────────────────────────────────────────── */
+:root {
+  --verde: #0e6b3b;    --verde-f: #e6f4ec;    --verde-b: #b9e0c9;
+  --azul: #2b628f;     --azul-f: #e5eff8;     --azul-b: #bcd5ea;
+  --amarillo: #7a5d00; --amarillo-f: #fbf4d6; --amarillo-b: #eedc96;
+  --violeta: #6a4c9c;  --violeta-f: #efe9f8;  --violeta-b: #d3c6ec;
+
+  --vp-c-brand-1: var(--verde);
+  --vp-c-brand-2: #159957;
+  --vp-c-brand-3: #159957;
+  --vp-c-brand-soft: var(--verde-f);
+}
+.dark {
+  --verde: #8fd4ad;    --verde-f: #1d2b24;    --verde-b: #3c6650;
+  --azul: #9cc3e6;     --azul-f: #1e2833;     --azul-b: #3d5770;
+  --amarillo: #ead27a; --amarillo-f: #2d2a1c; --amarillo-b: #6b5d2a;
+  --violeta: #c4b2ea;  --violeta-f: #28233a;  --violeta-b: #5a4c7d;
+
+  --vp-c-brand-1: var(--verde);
+  --vp-c-brand-2: #6cc196;
+  --vp-c-brand-3: #2f7a55;
+  --vp-c-brand-soft: rgba(143, 212, 173, 0.16);
+}
+
+/* Recuadros de VitePress (::: tip, ::: info, ::: warning, ::: danger, ::: details), por si se usan */
+:root, .dark {
+  --vp-custom-block-tip-text: var(--verde);     --vp-custom-block-tip-bg: var(--verde-f);       --vp-custom-block-tip-border: var(--verde-b);
+  --vp-custom-block-info-text: var(--azul);     --vp-custom-block-info-bg: var(--azul-f);       --vp-custom-block-info-border: var(--azul-b);
+  --vp-custom-block-warning-text: var(--amarillo); --vp-custom-block-warning-bg: var(--amarillo-f); --vp-custom-block-warning-border: var(--amarillo-b);
+  --vp-custom-block-danger-text: var(--violeta); --vp-custom-block-danger-bg: var(--violeta-f);   --vp-custom-block-danger-border: var(--violeta-b);
+  --vp-custom-block-details-bg: var(--violeta-f); --vp-custom-block-details-border: var(--violeta-b);
+}
+
+/* ── Lectura más cómoda ────────────────────────────────────────────── */
+.vp-doc p,
+.vp-doc li { line-height: 1.75; }
+.vp-doc h2 { border-top: none; padding-top: 8px; margin-top: 48px; }
+.vp-doc h2::after { content: ''; display: block; height: 2px; margin-top: 8px; background: var(--violeta-b); }
+.vp-doc table { display: table; width: 100%; }
+.vp-doc th { background: var(--azul-f); color: var(--azul); }
+.vp-doc mark { background: var(--amarillo-f); color: inherit; padding: 0 2px; border-radius: 3px; }
+.vp-doc blockquote { border-left-color: var(--verde-b); background: var(--verde-f); padding: 8px 16px; border-radius: 0 8px 8px 0; }
+.vp-doc blockquote > p { color: var(--vp-c-text-1); }
+
+/* ── Diagramas Mermaid centrados ───────────────────────────────────── */
+.vp-doc .mermaid { display: flex; justify-content: center; margin: 24px 0; }
+
+/* ── Botón «Descargar PDF» ─────────────────────────────────────────── */
+.barra-tema { display: flex; justify-content: flex-end; margin-bottom: -8px; }
+.boton-pdf {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px;
+  border: 1px solid var(--verde-b); border-radius: 8px; background: var(--verde-f);
+  font-size: 13px; font-weight: 600; color: var(--verde); cursor: pointer;
+  transition: border-color 0.15s;
+}
+.boton-pdf:hover { border-color: var(--verde); }
+
+/* ── Imágenes ──────────────────────────────────────────────────────── */
+.vp-doc img { display: block; margin: 16px auto; border-radius: 8px; cursor: zoom-in; }
+.medium-zoom-overlay, .medium-zoom-image--opened { z-index: 999; }
+
+/* ── Impresión / PDF ───────────────────────────────────────────────── */
+@media print {
+  @page { size: A4; margin: 16mm 14mm; }
+  html, body { background: #fff !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .VPNav, .VPLocalNav, .VPSidebar, .VPBackdrop, .VPFooter, .VPDocFooter,
+  .aside, .barra-tema, button.copy, .vp-doc [class*='language-'] > span.lang,
+  .VPSkipLink { display: none !important; }
+  .VPContent, .VPContent.has-sidebar { padding: 0 !important; margin: 0 !important; }
+  .VPDoc, .VPDoc .container, .VPDoc .content, .VPDoc .content-container {
+    padding: 0 !important; margin: 0 !important; max-width: none !important;
+  }
+  .vp-doc { font-size: 11pt; }
+  .vp-doc h1 { margin-top: 0; }
+  .vp-doc h2, .vp-doc h3 { break-after: avoid; }
+  .vp-doc h2 { margin-top: 28px; }
+  .vp-doc table, .vp-doc img, .mermaid, .vp-doc div[class*='language-'] { break-inside: avoid; }
+  .vp-doc div[class*='language-'] pre { white-space: pre-wrap; word-break: break-word; }
+  .vp-doc div[class*='language-'] code { width: auto !important; }
+  .vp-doc a { text-decoration: none; }
+}
+
+/* ── Tarjetas de la portada (las escribe index.md con su propio estilo):
+      mismos tonos pastel y modo oscuro, sin tocar el .md ───────────── */
+.vp-doc .card { background: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-divider); box-shadow: none; }
+.vp-doc .card h4 { color: var(--verde); }
+.vp-doc .card p { color: var(--vp-c-text-2); }
+.vp-doc .card .badge { background: var(--verde-f); color: var(--verde); border: 1px solid var(--verde-b); }
+.vp-doc .card .btn { background: var(--verde-f); color: var(--verde) !important; border: 1px solid var(--verde-b); text-decoration: none; }
+.vp-doc .card .btn:hover { background: var(--verde-f); border-color: var(--verde); }
+
+/* ── Código: el tema de colores de serie usa rojo y naranja, y algún tono con poco
+      contraste. Se cambian por los de la paleta (el resto se queda igual). ──── */
+.vp-doc span[style*="--shiki-light:#D73A49"] { --shiki-light: #6a4c9c !important; }
+.vp-doc span[style*="--shiki-dark:#F97583"]  { --shiki-dark: #c4b2ea !important; }
+.vp-doc span[style*="--shiki-light:#22863A"] { --shiki-light: #0e6b3b !important; }
+.vp-doc span[style*="--shiki-light:#E36209"] { --shiki-light: #7a5d00 !important; }
+.vp-doc span[style*="--shiki-dark:#FFAB70"]  { --shiki-dark: #ead27a !important; }
+.vp-doc span[style*="--shiki-light:#6A737D"] { --shiki-light: #5a636d !important; }
+.vp-doc span[style*="--shiki-dark:#6A737D"]  { --shiki-dark: #959da5 !important; }
+.vp-doc [class*='language-'] > span.lang { color: var(--vp-c-text-2); }
